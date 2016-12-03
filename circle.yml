@@ -10,11 +10,11 @@ checkout:
 deployment:
   production:
     branch: master
-      commands:
-        - git config --global user.email 'tom@tombull.com'
-        - git config --global user.name 'Tom Bull'
-        - gulp build
-        - cd dist
-        - git add -A
-        - git commit -a -m "Deployment ($CIRCLE_BUILD_NUM)"
-        - git push origin master -f
+    commands:
+      - git config --global user.email 'tom@tombull.com'
+      - git config --global user.name 'Tom Bull'
+      - gulp build
+      - cd dist
+      - git add -A
+      - git commit -a -m "Deployment ($CIRCLE_BUILD_NUM)"
+      - git push origin master -f
