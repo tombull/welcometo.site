@@ -6,6 +6,10 @@ checkout:
   post:
     - git submodule sync
     - git submodule update --init
+    - git submodule deinit dist
+    - git rm dist
+    - rm -rf .git/modules/dist
+    - git submodule add git@github.com:tombull/welcometo.site_build ./dist
 
 
 deployment:
@@ -13,5 +17,5 @@ deployment:
     branch: master
     commands:
       - git config --global user.email 'tom@tombull.com' && git config --global user.name 'Tom Bull'
-      - gulp build
+      - rm -rf ./dist/* && gulp build
       - cd dist && git add -A && git commit -a -m "Deployment for build $CIRCLE_BUILD_NUM ($CIRCLE_BUILD_URL)" && git push origin master -f
