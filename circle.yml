@@ -6,6 +6,9 @@ checkout:
   post:
     - git submodule sync
     - git submodule update --init
+    - git submodule deinit dist
+    - git rm dist
+    - rm -rf .git/modules/dist
 
 # deployment:
 #   production:
