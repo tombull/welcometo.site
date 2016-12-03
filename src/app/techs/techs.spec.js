@@ -1,7 +1,3 @@
-import angular from 'angular';
-import 'angular-mocks';
-import {techs} from './techs';
-
 const techsJson = [
   {
     key: 'gulp',
@@ -27,12 +23,8 @@ const techsJson = [
 ];
 
 describe('techs component', () => {
-  beforeEach(() => {
-    angular
-      .module('fountainTechs', ['app/techs/techs.html'])
-      .component('fountainTechs', techs);
-    angular.mock.module('fountainTechs');
-  });
+  beforeEach(angular.mock.module('app'));
+
   it('should render 3 elements <fountain-tech>', angular.mock.inject(($rootScope, $compile, $httpBackend) => {
     $httpBackend.when('GET', 'app/techs/techs.json').respond(techsJson);
     const element = $compile('<fountain-techs></fountain-techs>')($rootScope);

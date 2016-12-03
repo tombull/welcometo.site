@@ -1,3 +1,5 @@
-export const main = {
-  template: require('./main.html')
-};
+angular
+  .module('app')
+  .component('app', {
+    templateUrl: 'app/main.html'
+  });

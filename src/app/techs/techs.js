@@ -9,7 +9,9 @@ class TechsController {
   }
 }
 
-export const techs = {
-  template: require('./techs.html'),
-  controller: TechsController
-};
+angular
+  .module('app')
+  .component('fountainTechs', {
+    templateUrl: 'app/techs/techs.html',
+    controller: TechsController
+  });

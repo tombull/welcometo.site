@@ -1,15 +1,11 @@
-import angular from 'angular';
-import 'angular-mocks';
-import {tech} from './tech';
-
 describe('tech component', () => {
-  beforeEach(() => {
-    angular
-      .module('fountainTech', ['app/techs/tech.html'])
-      .component('fountainTech', tech);
-    angular.mock.module('fountainTech');
-  });
-
+  beforeEach(module('app', $provide => {
+    $provide.factory('fountainTech', () => {
+      return {
+        templateUrl: 'app/techs/tech.html'
+      };
+    });
+  }));
   it('should render Gulp', angular.mock.inject(($rootScope, $compile) => {
     const $scope = $rootScope.$new();
     $scope.fixture = {

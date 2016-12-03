@@ -1,3 +1,5 @@
-export const footer = {
-  template: require('./footer.html')
-};
+angular
+  .module('app')
+  .component('fountainFooter', {
+    templateUrl: 'app/footer.html'
+  });

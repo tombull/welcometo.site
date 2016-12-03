@@ -1,3 +1,5 @@
-export const title = {
-  template: require('./title.html')
-};
+angular
+  .module('app')
+  .component('fountainTitle', {
+    templateUrl: 'app/title.html'
+  });

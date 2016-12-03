@@ -49,10 +49,10 @@
     "text2": "Things should be simple. We believe in testing and so we want to make it as simple as possible"
   },
   {
-    "key": "webpack",
-    "title": "Webpack",
-    "logo": "http://fountainjs.io/assets/imgs/webpack.png",
-    "text1": "Webpack is a module bundler",
-    "text2": "Webpack, the production / unbiased / flexible / extensible / open source module bundler"
+    "key": "inject",
+    "title": "Inject & Bower",
+    "logo": "http://fountainjs.io/assets/imgs/bower.png",
+    "text1": "Automatically inject scripts and styles tags in your HTML.",
+    "text2": "Use Bower, a package manager for the web."
   }
 ]

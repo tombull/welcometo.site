@@ -1,3 +1,5 @@
-export const header = {
-  template: require('./header.html')
-};
+angular
+  .module('app')
+  .component('fountainHeader', {
+    templateUrl: 'app/header.html'
+  });
