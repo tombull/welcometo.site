@@ -1,0 +1,3 @@
+[submodule "dist"]
+	path = dist
+	url = https://tombull@github.com/tombull/welcometo.site_build.git
