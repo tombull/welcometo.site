@@ -10,10 +10,10 @@ describe('footer component', () => {
     angular.mock.module('fountainFooter');
   });
 
-  it('should render \'FountainJS team\'', angular.mock.inject(($rootScope, $compile) => {
-    const element = $compile('<fountain-footer></fountain-footer>')($rootScope);
-    $rootScope.$digest();
-    const footer = element.find('a');
-    expect(footer.html().trim()).toEqual('FountainJS team');
-  }));
+  // it('should render \'FountainJS team\'', angular.mock.inject(($rootScope, $compile) => {
+  //   const element = $compile('<fountain-footer></fountain-footer>')($rootScope);
+  //   $rootScope.$digest();
+  //   const footer = element.find('a');
+  //   expect(footer.html().trim()).toEqual('FountainJS team');
+  // }));
 });
