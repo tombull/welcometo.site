@@ -9,7 +9,9 @@ checkout:
     - git submodule deinit dist
     - git rm dist
     - rm -rf .git/modules/dist
-    - git submodule add git@github.com:tombull/welcometo.site_build ./dist
+    - git submodule add -f git@github.com:tombull/welcometo.site_build ./dist
+    - git submodule sync
+    - git submodule update --init
 
 
 deployment:
