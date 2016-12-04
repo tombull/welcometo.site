@@ -1,0 +1,8 @@
+{
+  "name": "welcomeToSite",
+  "deps": false,
+  "wrap": false,
+  "constants": {
+    "hello": "hello"
+  }
+}

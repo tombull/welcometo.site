@@ -8,7 +8,7 @@
 
   function config($urlRouterProvider, $stateProvider) {
     'ngInject';
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/');
     $stateProvider.state('site', {
       abstract: true
     });
