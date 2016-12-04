@@ -1,40 +1,64 @@
-const gulp = require('gulp');
-const HubRegistry = require('gulp-hub');
-const browserSync = require('browser-sync');
+'use strict';
 
-const conf = require('./conf/gulp.conf');
+var _ = require('lodash')
+  , buildConfig = require('./build.config')
+  , config = {}
+  , gulp = require('gulp')
+  , gulpFiles = require('require-dir')('./gulp')
+  , path = require('path')
+  , $, key;
 
-// Load some files into the registry
-const hub = new HubRegistry([conf.path.tasks('*.js')]);
+$ = require('gulp-load-plugins')({
+  pattern: [
+  'browser-sync',
+  'del',
+  'gulp-*',
+  'karma',
+  'main-bower-files',
+  'multi-glob',
+  'plato',
+  'run-sequence',
+  'streamqueue',
+  'uglify-save-license',
+  'wiredep',
+  'yargs'
+  ]
+});
 
-// Tell gulp to use the tasks just loaded
-gulp.registry(hub);
+_.merge(config, buildConfig);
 
-gulp.task('inject', gulp.series(gulp.parallel('styles', 'scripts'), 'inject'));
-gulp.task('build', gulp.series('partials', gulp.parallel('inject', 'other'), 'build'));
-gulp.task('test', gulp.series('scripts', 'karma:single-run'));
-gulp.task('test:auto', gulp.series('watch', 'karma:auto-run'));
-gulp.task('serve', gulp.series('inject', 'watch', 'browsersync'));
-gulp.task('serve:dist', gulp.series('default', 'browsersync:dist'));
-gulp.task('default', gulp.series('clean', 'build'));
-gulp.task('watch', watch);
+config.appFiles = path.join(config.appDir, '**/*');
+config.appFontFiles = path.join(config.appDir, 'fonts/**/*');
+config.appImageFiles = path.join(config.appDir, 'images/**/*');
+config.appMarkupFiles = path.join(config.appDir, '**/*.pug');
+config.fileManagerMarkupFiles = path.join(config.appDir, 'filemanager/**/*.html');
+config.appScriptFiles = path.join(config.appDir, '**/*.es6');
+config.fileManagerScriptFiles = path.join(config.appDir, 'filemanager/js/**/*.js');
+config.appStyleFiles = path.join(config.appDir, '**/*.scss');
+config.fileManagerStyleFiles = path.join(config.appDir, 'filemanager/css/**/*.css');
+config.appConfigFiles = path.join(config.appDir, '**/*.config.json');
+config.staticAssetFiles = path.join(config.appDir, 'staticassets/**/*');
 
-function reloadBrowserSync(cb) {
-  browserSync.reload();
-  cb();
+config.buildDirectiveTemplateFiles = path.join(config.buildDir, '**/*directive.tpl.html');
+config.buildJsFiles = path.join(config.buildJs, '**/*.js');
+
+config.buildTestDirectiveTemplateFiles = path.join(config.buildTestDir, '**/*directive.tpl.html');
+config.buildE2eTestsDir = path.join(config.buildTestDir, 'e2e');
+config.buildE2eTests = path.join(config.buildE2eTestsDir, '**/*_test.js');
+config.buildTestDirectiveTemplatesDir = path.join(config.buildTestDir, 'templates');
+config.buildUnitTestsDir = path.join(config.buildTestDir, config.unitTestDir);
+config.buildUnitTestFiles = path.join(config.buildUnitTestsDir, '**/*_test.js');
+
+config.e2eFiles = path.join('e2e', '**/*.es6');
+config.unitTestFiles = path.join(config.unitTestDir, '**/*_test.es6');
+
+for (key in gulpFiles) {
+  gulpFiles[key](gulp, $, config);
 }
 
-function watch(done) {
-  gulp.watch([
-    conf.path.src('index.html'),
-    'bower.json'
-  ], gulp.parallel('inject'));
+gulp.task('dev', ['build'], function () {
+  gulp.start('browserSync');
+  gulp.start('watch');
+});
 
-  gulp.watch(conf.path.src('app/**/*.html'), gulp.series('partials', reloadBrowserSync));
-  gulp.watch([
-    conf.path.src('**/*.scss'),
-    conf.path.src('**/*.css')
-  ], gulp.series('styles'));
-  gulp.watch(conf.path.src('**/*.js'), gulp.series('inject'));
-  done();
-}
+gulp.task('default', ['dev']);

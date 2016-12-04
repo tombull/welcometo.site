@@ -1,0 +1,10 @@
+{
+  "name": "home",
+  "deps": false,
+  "wrap": false,
+  "constants": {
+    "backendServer": {
+      "baseUrl": "https://api.welcometo.site"
+    }
+  }
+}

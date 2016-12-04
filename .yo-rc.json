@@ -1,23 +1,14 @@
 {
-  "generator-fountain-angular1": {
-    "version": "1.0.0-rc1",
-    "props": {
-      "framework": "angular1",
-      "modules": "inject",
-      "js": "babel",
-      "ci": [
-        "circleci"
-      ],
-      "css": "scss",
-      "resolved": "/Users/tom/.nvm/versions/node/v6.9.1/lib/node_modules/generator-fountain-webapp/node_modules/generator-fountain-angular1/generators/app/index.js",
-      "namespace": "fountain-angular1",
-      "argv": {
-        "remain": [],
-        "cooked": [],
-        "original": []
-      },
-      "sample": "techs",
-      "router": "uirouter"
-    }
+  "generator-ng-poly": {
+    "appScript": "es6",
+    "controllerAs": true,
+    "directiveTemplateUrl": true,
+    "e2eTestFramework": "jasmine",
+    "markup": "jade",
+    "ngRoute": false,
+    "structure": "module-only",
+    "style": "scss",
+    "testFramework": "jasmine",
+    "testScript": "es6"
   }
 }

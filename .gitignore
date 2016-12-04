@@ -1,5 +1,24 @@
-.tmp/
-coverage/
-dist/
-node_modules/
-bower_components/
+# node_modules
+node_modules
+report
+coverage
+build
+tmp
+
+# Log files
+*.log
+
+#bower_components
+bower_components
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# OS X
+.DS_Store

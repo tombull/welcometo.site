@@ -1,0 +1,20 @@
+#filebrowser(ondragstart='return false;', ng-cloak)
+  angular-filemanager(disable-animate)
+#account-services(enable-animate ng-cloak)
+  md-fab-speed-dial.md-scale(md-direction='up' md-open='home.accountServicesMenuOpen')
+    md-fab-trigger
+      md-button.md-fab.md-primary(aria-label='Account Services')
+        md-tooltip(md-direction='left' md-visible='tooltipVisible') Account Services
+        md-icon person
+    md-fab-actions
+      md-button.md-fab.md-raised(ng-click='home.showLogout($event)' aria-label='Sign Out')
+        md-tooltip(md-direction='left' md-visible='tooltipVisible') Sign Out
+        md-icon exit_to_app
+      a(ui-sref='changepassword')
+        md-button.md-fab.md-raised(aria-label='Change Password')
+          md-tooltip(md-direction='left' md-visible='tooltipVisible') Change Password
+          md-icon lock
+      a(ui-sref='/manageusers' ng-show='home.isAdmin')
+        md-button.md-fab.md-raised(aria-label='Manage Users')
+          md-tooltip(md-direction='left' md-visible='tooltipVisible') Manage Users
+          md-icon people

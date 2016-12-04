@@ -1,11 +1,33 @@
 {
-  "name": "fountain-inject",
-  "version": "0.0.1",
+  "name": "fileBrowserWeb",
+  "version": "0.0.0",
   "dependencies": {
-    "angular": "^1.5.0",
-    "angular-ui-router": "1.0.0-beta.1"
+    "angular": "~1.5.*",
+    "angular-animate": "~1.5.*",
+    "angular-cookies": "~1.5.*",
+    "angular-messages": "~1.5.*",
+    "angular-resource": "~1.5.*",
+    "angular-ui-router": "~0.2.10",
+    "angular-material": "~0.10.0",
+    "lodash": "~3.9.0",
+    "visibilityjs": "^1.2.3",
+    "angular-ui-validate": "^1.2.2",
+    "angular-translate": "^2.11.0",
+    "es6-shim": "^0.35.1"
   },
   "devDependencies": {
-    "angular-mocks": "^1.5.0"
+    "angular-mocks": "~1.5.*"
+  },
+  "overrides": {
+    "visibilityjs": {
+      "main": [
+        "lib/visibility.core.js"
+      ]
+    },
+    "angular-material": {
+      "main": [
+        "angular-material.js"
+      ]
+    }
   }
 }
