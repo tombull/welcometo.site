@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Get started with SceneView - Create a 3D map</title>
+    <style>
+        html,
+        body,
+        #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.1/esri/css/main.css">
+</head>
+
+<body>
+    <div id="viewDiv"></div>
+    <script src="https://js.arcgis.com/4.1/"></script>
+    <script>
+        require([
+            "esri/Map",
+            "esri/views/SceneView",
+
+            "esri/layers/SceneLayer",
+            "esri/layers/GraphicsLayer",
+
+            "esri/Graphic",
+            "esri/geometry/Point",
+            "esri/geometry/Polyline",
+            "esri/geometry/Polygon",
+
+            "esri/symbols/SimpleMarkerSymbol",
+            "esri/symbols/SimpleLineSymbol",
+            "esri/symbols/SimpleFillSymbol",
+
+            "esri/renderers/SimpleRenderer",
+            "esri/symbols/MeshSymbol3D",
+            "esri/symbols/FillSymbol3DLayer",
+            "esri/symbols/PictureMarkerSymbol",
+
+            "dojo/domReady!"
+        ], function(Map, SceneView, SceneLayer, GraphicsLayer,
+            Graphic, Point, Polyline, Polygon,
+            SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol,
+            SimpleRenderer, MeshSymbol3D, FillSymbol3DLayer, PictureMarkerSymbol) {
+            // Create default MeshSymbol3D for symbolizing SceneLayer
+            // a new FillSymbol3DLayer is created by default within the symbol
+            var symbol = new MeshSymbol3D({
+                symbolLayers: [
+                    new FillSymbol3DLayer({
+                        material: {
+                            color: [120, 200, 120, 0.95]
+                        }
+                    })
+                ]
+            });
+
+            // Create the renderer and configure visual variables
+            var renderer = new SimpleRenderer({
+                symbol: symbol
+            });
+
+            var map = new Map({
+                basemap: "streets",
+                ground: "world-elevation",
+                // layers: [sceneLayer]
+            });
+
+            var londonExtent = { // autocasts as new Extent()
+                xmin: -1,
+                xmax: 0.75,
+                ymin: 51.25,
+                ymax: 51.75
+            };
+
+            var view = new SceneView({
+                container: "viewDiv",
+                map: map,
+                clippingArea: londonExtent,
+                scale: 100000,
+                center: [-0.12, 51.50]
+            });
+
+            view.ui.empty('top-left');
+            var graphicsLayer = new GraphicsLayer();
+            map.add(graphicsLayer);
+
+            view.on('click', function() {
+                var long = -0.0769; //from backend
+                var lat = 51.5212; //from backend
+                var sc = 1500; //from backend
+                var sz = sc / 40;
+                var cl1 = [255, 200, 100];
+                var cl2 = [0, 0, 0];
+
+                var point = new Point({
+                        longitude: long,
+                        latitude: lat,
+                        z: sz
+                    }),
+                    markerSymbol = new SimpleMarkerSymbol({
+                        color: cl1,
+                        outline: { // autocasts as new SimpleLineSymbol()
+                            color: cl2,
+                            width: 2
+                        }
+                    });
+
+                var pic = new PictureMarkerSymbol({
+                    url: "https://webapps-cdn.esri.com/Apps/MegaMenu/img/logo.jpg",
+                    width: 8,
+                    height: 8
+                });
+
+                var pointGraphic = new Graphic({
+                    geometry: point,
+                    symbol: markerSymbol
+                });
+
+                graphicsLayer.add(pointGraphic);
+
+                var polyline = new Polyline([
+                        [long, lat, 0],
+                        [long, lat, sz]
+                    ]),
+                    lineSymbol = new SimpleLineSymbol({
+                        color: cl1,
+                        width: 4
+                    });
+
+                var polylineGraphic = new Graphic({
+                    geometry: polyline,
+                    symbol: lineSymbol
+                });
+
+                graphicsLayer.add(polylineGraphic);
+
+                view.goTo({
+                    target: [long, lat],
+                    tilt: 60,
+                    scale: sc
+                });
+                // Create SceneLayer and add to the map
+                var sceneLayer = new SceneLayer({
+                    // visible: false,
+                    renderer: renderer,
+                    url: "http://tiles.arcgis.com/tiles/WQ9KVmV6xGGMnCiQ/arcgis/rest/services/OS_Open_3D_Building_Heights/SceneServer/"
+                });
+
+                map.add(sceneLayer);
+
+                // view.on('click', function() {
+                //     view.goTo({
+                //         tilt: 0,
+                //         scale: 30000,
+                //         center: [-0.12, 51.50]
+                //     });
+                //     view.on('click', function() {
+                //         view.goTo({
+                //             target: [long, lat],
+                //             tilt: 40,
+                //             scale: sc
+                //         });
+                //     });
+                // });
+            });
+        });
+    </script>
+</body>
+
+</html>
