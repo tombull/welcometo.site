@@ -1,14 +1,14 @@
-div(ng-show="ctrl.isFirst")
-  h1 Welcome To site
+div(ng-show="ctrl.isFirst", id="welcomeScreen")
+  h1 Welcome To Site
   h2 Who are you here to see?
   md-autocomplete(md-selected-item="ctrl.selectedItem",md-search-text="ctrl.searchText",md-items="item in ctrl.getNames(ctrl.searchText)",md-item-text="item")
     span(md-highlight-text="searchText") {{item}}
-  md-button(class="md-primary", ng-click="ctrl.goToMap()") Go
+  md-button(class="md-primary md-raised", ng-click="ctrl.goToMap()") Go
 div(id="viewDiv", ng-show="ctrl.isMap")
 div(id="inTheBuilding", ng-show="ctrl.movementDone < 6 && ctrl.isMap")
   h1 Locating Tom Shea...
 div(id="inTheBuilding", ng-show="ctrl.movementDone > 6")
-  h1 Tom Shea is in the building, contacting...
+  h1(ng-show="ctrl.movementDone < 12") Tom Shea is in the building, contacting...
   iframe(class="videoFrame",src="http://localhost:8080/#/call")
 div(id="openingTheDoor", ng-show="ctrl.movementDone > 60")
   h1 Welcome! The door is opening.

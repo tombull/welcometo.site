@@ -28,11 +28,45 @@ div#account-services {
   width: 100%;
 }
 
-#inTheBuilding {
+#inTheBuilding, #openingTheDoor {
   z-index: 2000;
 }
 
 .videoFrame {
   position: absolute;
-  
+  top: 2%;
+  right: 2%;
+  width: 32%;
+  height: 24vw;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background-color:rgba(0, 0, 0, 0);
+}
+
+#welcomeScreen {
+  width: 55%;
+  h1 {
+    color: #fff;
+    text-shadow: 2px 0px 7px rgba(0, 0, 0, 0.9);
+  }
+  h2 {
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 2px 0px 7px rgba(0, 0, 0, 0.9);
+  }
+  md-button {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+}
+#inTheBuilding {
+  h1 {
+    color: #fff;
+    text-shadow: 2px 0px 7px rgba(0, 0, 0, 0.9);
+  }
+}
+#openingTheDoor {
+  h1 {
+    color: #fff;
+    text-shadow: 2px 0px 7px rgba(0, 0, 0, 0.9);
+  }
 }
