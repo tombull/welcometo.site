@@ -18,5 +18,5 @@ deployment:
     branch: master
     commands:
       - git config --global user.email 'tom@tombull.com' && git config --global user.name 'Tom Bull'
-      - rm -rf ./build/* && gulp build
-      - cd build && git add -A && git commit -a -m "Deployment for build $CIRCLE_BUILD_NUM ($CIRCLE_BUILD_URL)" && git push origin master -f
+      - gulp build && echo "gitdir: ../../.git/modules/build/app" > ./build/app/.git
+      - cd build/app && git add -A && git commit -a -m "Deployment for build $CIRCLE_BUILD_NUM ($CIRCLE_BUILD_URL)" && git push origin master -f
