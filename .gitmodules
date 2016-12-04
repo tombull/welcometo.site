@@ -1,0 +1,3 @@
+[submodule "build/app"]
+	path = build/app
+	url = git@github.com:tombull/welcometo.site_build

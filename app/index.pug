@@ -1,0 +1,36 @@
+doctype html
+//- add in 'ng-strict-di' to check di
+html(lang="en" ng-app="welcomeToSite")
+  head
+    title WelcomeTo.Site
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+    |<!-- inject:head:js -->
+    |<!-- endinject -->
+    |<!-- inject:html -->
+    |<!-- endinject -->
+    link(href="//fonts.googleapis.com/css?family=Roboto:400,500,400italic" rel="stylesheet" type="text/css")
+    link(href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type='text/css')
+    |<!-- bower:css -->
+    |<!-- endbower -->
+    |<!-- inject:css -->
+    |<!-- endinject -->
+  body
+    #outer-view(ui-view, layout="column", layout-align="center center", layout-fill, ng-cloak)
+
+
+    |<!-- bower:js -->
+    |<!-- endbower -->
+    |<!-- inject:js -->
+    |<!-- endinject -->
+    script(type="text/javascript").
+      (function () {
+        angular.module('welcomeToSite')
+          .constant('lazyLoadJsPaths', {
+            /* constants:js */
+            /* endconstants */
+          })
+          .constant('lazyLoadCssPaths', {
+            /* constants:css */
+            /* endconstants */
+          });
+      }());

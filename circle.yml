@@ -1,0 +1,23 @@
+machine:
+  node:
+    version: 6.2.2
+
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init
+    - git submodule deinit build/app
+    - git rm build/app
+    - rm -rf .git/modules/build
+    - git submodule add -f git@github.com:tombull/welcometo.site_build ./build/app
+    - git submodule sync
+    - git submodule update --init
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - git config --global user.email 'tom@tombull.com' && git config --global user.name 'Tom Bull'
+      - gulp build
+      - "echo 'gitdir: ../../.git/modules/build/app' > ./build/app/.git"
+      - cd build/app && git add -A && git commit -a -m "Deployment for build $CIRCLE_BUILD_NUM ($CIRCLE_BUILD_URL)" && git push origin master -f

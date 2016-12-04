@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "angular",
+    "dustinspecker/esnext"
+  ],
+  "rules": {
+    "angular/controller-name": [2, "/[A-Z].*Ctrl$/"],
+    "consistent-this": 0,
+    "no-underscore-dangle": 0,
+    "semi": ["error", "always"],
+    "func-style": 0,
+    "max-len": 0,
+    "angular/no-service-method": 0,
+    "complexity": ["error", 20],
+    "max-params": ["error", 20]
+  },
+  "globals": {
+    "jQuery": true
+  }
+}
